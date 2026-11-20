@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Tiago Binz · Unreal Engine Developer</title>
+<meta name="description" content="Tiago Binz, Unreal Engine developer from Brazil. Rocket Racing and Fortnite with Epic Games, KPop Demon Hunters at Netflix House, console and mobile porting.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #ffffff;
+    --ink: #16181d;
+    --ink-2: #4a4f5a;
+    --ink-3: #7c818c;
+    --rule: #e4e5e8;
+    --accent: #c2410c;
+    --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+    --sans: "IBM Plex Sans", system-ui, "Segoe UI", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #121315;
+      --ink: #ececea;
+      --ink-2: #b4b6b9;
+      --ink-3: #85888d;
+      --rule: #2a2c30;
+      --accent: #f08a4b;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font: 400 17px/1.65 var(--sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  a:hover { text-decoration-color: var(--accent); color: var(--accent); }
+  .page { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+  /* Top bar */
+  .top {
+    display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px 24px;
+    padding: 28px 0; border-bottom: 1px solid var(--rule);
+    font-family: var(--mono); font-size: 14px;
+  }
+  .top .name { font-weight: 500; text-decoration: none; }
+  .top nav { display: flex; gap: 20px; }
+
+  /* Intro */
+  .intro { padding: 72px 0 64px; }
+  .intro h1 {
+    font-size: clamp(28px, 4.4vw, 40px); line-height: 1.22; font-weight: 600;
+    letter-spacing: -0.015em; margin: 0 0 28px; max-width: 760px;
+  }
+  .intro p { color: var(--ink-2); max-width: 640px; margin: 0 0 16px; }
+  .status {
+    font-family: var(--mono); font-size: 14px; color: var(--ink-3); margin-top: 32px;
+  }
+  .status b { color: var(--accent); font-weight: 500; }
+
+  /* Section headings */
+  h2 {
+    font-family: var(--mono); font-size: 13px; font-weight: 500; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--ink-3);
+    margin: 0; padding: 14px 0; border-top: 1px solid var(--ink);
+  }
+  section { padding-bottom: 56px; }
+
+  /* Work entries: date column + content column */
+  .entry {
+    display: grid; grid-template-columns: 150px 1fr; gap: 24px;
+    padding: 28px 0; border-top: 1px solid var(--rule);
+  }
+  h2 + .entry { border-top: 0; }
+  .when { font-family: var(--mono); font-size: 14px; color: var(--ink-3); padding-top: 3px; }
+  .entry h3 { font-size: 21px; font-weight: 600; line-height: 1.3; margin: 0 0 2px; }
+  .who { color: var(--ink-3); margin: 0 0 14px; font-size: 15px; }
+  .entry p { margin: 0 0 12px; color: var(--ink-2); }
+  .entry ul { margin: 0 0 14px; padding-left: 18px; color: var(--ink-2); }
+  .entry li { margin-bottom: 4px; }
+  .entry li::marker { color: var(--ink-3); }
+  .more { font-family: var(--mono); font-size: 14px; display: flex; flex-wrap: wrap; gap: 6px 20px; }
+  .note { color: var(--accent); font-weight: 500; }
+
+  /* Video: thumbnail first, player loads on click */
+  .video {
+    position: relative; aspect-ratio: 16 / 9; margin: 6px 0 18px; background: #000; overflow: hidden;
+  }
+  .video img, .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; object-fit: cover; }
+  .video button {
+    position: absolute; left: 16px; bottom: 16px; cursor: pointer;
+    font: 500 14px var(--mono); color: #fff; background: rgba(0,0,0,.72);
+    border: 1px solid rgba(255,255,255,.35); padding: 8px 14px;
+  }
+  .video button:hover { background: var(--accent); border-color: var(--accent); }
+
+  .shot { margin: 6px 0 16px; }
+  .shot .video { margin: 0 0 6px; }
+  .shot figcaption { font-family: var(--mono); font-size: 13px; color: var(--ink-3); }
+  .shot.cert { max-width: 420px; }
+  .shot.cert img { display: block; width: 100%; height: auto; border: 1px solid var(--rule); margin-bottom: 6px; }
+
+  .video-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 6px 0 16px; }
+  .video-pair figure { margin: 0; }
+  .video-pair .video { margin: 0 0 6px; }
+  .video-pair .video button { left: 10px; bottom: 10px; padding: 6px 10px; font-size: 13px; }
+  .video-pair figcaption { font-family: var(--mono); font-size: 13px; color: var(--ink-3); }
+  @media (max-width: 680px) { .video-pair { grid-template-columns: 1fr; } }
+
+  /* Compact list for smaller projects */
+  .list { list-style: none; margin: 0; padding: 0; }
+  .list li {
+    display: grid; grid-template-columns: 150px 1fr auto; gap: 24px; align-items: baseline;
+    padding: 16px 0; border-top: 1px solid var(--rule);
+  }
+  h2 + .list li:first-child { border-top: 0; }
+  .list strong { font-weight: 600; display: block; }
+  .list span.desc { color: var(--ink-2); font-size: 15px; }
+  .list .more { white-space: nowrap; }
+
+  /* Skills */
+  .skills { display: grid; grid-template-columns: 150px 1fr; gap: 10px 24px; margin: 8px 0 0; }
+  .skills dt { font-family: var(--mono); font-size: 14px; color: var(--ink-3); padding-top: 2px; }
+  .skills dd { margin: 0; color: var(--ink-2); }
+
+  footer {
+    border-top: 1px solid var(--ink); padding: 24px 0 48px;
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px 24px;
+    font-family: var(--mono); font-size: 14px; color: var(--ink-3);
+  }
+  footer .links { display: flex; gap: 20px; }
+
+  @media (max-width: 680px) {
+    body { font-size: 16px; }
+    .intro { padding: 48px 0 40px; }
+    .entry, .skills { grid-template-columns: 1fr; gap: 6px; }
+    .list li { grid-template-columns: 1fr; gap: 4px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="top">
+    <a class="name" href="#">Tiago Ehlers Binz</a>
+    <nav>
+      <a href="Tiago-Binz-Resume.pdf">Résumé</a>
+      <a href="https://linkedin.com/in/tiago-binz">LinkedIn</a>
+      <a href="mailto:tiago.binz@gmail.com">Email</a>
+    </nav>
+  </header>
+
+  <div class="intro">
+    <h1>I'm Tiago, a senior game developer with 10+ years of experience. I've worked on Fortnite with Epic Games, led programming at my own studio, and built a game for Netflix House.</h1>
+    <p>Most of my work is C++ gameplay, UI, porting to consoles and mobile, and the tools that make those jobs faster.</p>
+    <p>I've been making games since 2016, have taught game development in Unity and Unreal, and I have a B.Sc. in Computer Science from UFRGS.</p>
+    <p class="status"><b>●</b> Available for remote work · Porto Alegre, Brazil (UTC−3)</p>
+  </div>
+
+  <section>
+    <h2>Work</h2>
+
+    <article class="entry">
+      <div class="when">2026</div>
+      <div>
+        <h3>KPop Demon Hunters: The Immersive Experience</h3>
+        <p class="who">Netflix House · Neutech · Principal Unreal Engine developer</p>
+        <figure class="shot">
+          <div class="video" data-yt="XxqTmyE7Z2s" data-start="15">
+            <img src="https://img.youtube.com/vi/XxqTmyE7Z2s/hqdefault.jpg" alt="Press preview footage of KPop Demon Hunters: The Immersive Experience" loading="lazy">
+            <button type="button">Play video</button>
+          </div>
+          <figcaption>Press preview at Netflix House Dallas, by Jkruz Onair</figcaption>
+        </figure>
+        <ul>
+          <li>Gameplay that adapts to the size of the group, from a handful of players to a few dozen.</li>
+          <li>nDisplay cluster across several machines, keeping visuals and gameplay events in sync over the local network.</li>
+          <li>TCP and UDP links to the body-tracking sensors and the venue's show control system.</li>
+          <li>Worked with the client to turn creative goals into technical requirements.</li>
+        </ul>
+        <div class="more"><a href="https://www.netflix.com/house/dallas/kpop-demon-hunters/the-experience">netflix.com/house</a></div>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="when">2023–2026</div>
+      <div>
+        <h3>Rocket Racing &amp; Fortnite: Save the World</h3>
+        <p class="who">Epic Games · through Globant · Unreal Engine developer</p>
+        <div class="video-pair">
+          <figure>
+            <div class="video" data-yt="NIhbK4-ZdKA">
+              <img src="https://img.youtube.com/vi/NIhbK4-ZdKA/hqdefault.jpg" alt="Still from the Rocket Racing launch trailer" loading="lazy">
+              <button type="button">Play trailer</button>
+            </div>
+            <figcaption>Rocket Racing launch, December 2023</figcaption>
+          </figure>
+          <figure>
+            <div class="video" data-yt="MTNr5Z1G4z8">
+              <img src="https://img.youtube.com/vi/MTNr5Z1G4z8/hqdefault.jpg" alt="Still from the Save the World free-to-play trailer" loading="lazy">
+              <button type="button">Play trailer</button>
+            </div>
+            <figcaption>Save the World free-to-play launch, April 2026</figcaption>
+          </figure>
+        </div>
+        <p>I was on the team for the launch of both.</p>
+        <ul>
+          <li>Porting and optimization so the same Rocket Racing tracks that run on PS5 also run on Nintendo Switch, Android and iOS, combining code and tech art changes.</li>
+          <li>An internal profiling tool that points out materials and meshes that could be simplified, plus smaller tools for the team's daily workflow.</li>
+          <li>UI features for the free-to-play release of Save the World.</li>
+          <li>Gameplay, UI and platform bugs in a very large C++ codebase, with code review almost every day.</li>
+        </ul>
+        <div class="more">
+          <a href="https://www.globant.com/studio/games/#/?view=project&amp;title=rocketRacing">Rocket Racing at Globant</a>
+          <a href="https://www.globant.com/studio/games/#/?view=project&amp;title=fortnite">Save the World at Globant</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="when">2018–2023</div>
+      <div>
+        <h3>Wardens: The Lost Legacy</h3>
+        <p class="who">Elemental Game Studio · Co-founder &amp; lead programmer · Unreal Engine 4</p>
+        <div class="video" data-yt="45vrYVzCyek">
+          <img src="https://img.youtube.com/vi/45vrYVzCyek/hqdefault.jpg" alt="Still from the Wardens: The Lost Legacy trailer" loading="lazy">
+          <button type="button">Play trailer</button>
+        </div>
+        <p>A third-person action RPG of our own, mixing hack 'n' slash combat with exploration and investigation. We pitched it at Game Connection America 2019 and signed a publisher deal with a budget above USD 500,000.</p>
+        <ul>
+          <li>Led a team of four programmers and set the technical direction.</li>
+          <li>Wrote gameplay, AI, UI, character animation systems and tools in C++.</li>
+          <li>Built a scalability system that kept the game above 30 FPS on minimum-spec PCs, and ported it to PS4 and Xbox One.</li>
+          <li>Prototyped the core mechanics in pre-production and co-wrote the game and technical design documents.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="when">2023–2026</div>
+      <div>
+        <h3>Non-Invasive Game Color Contrast Enhancement with Natural Color Preservation for Dichromats</h3>
+        <p class="who">UFRGS · Co-author · <span class="note">Best Paper, SIBGRAPI 2026</span></p>
+        <figure class="shot cert">
+          <a href="sibgrapi-2026-best-paper.jpg"><img src="sibgrapi-2026-best-paper.jpg" alt="SIBGRAPI 2026 Best Paper Award certificate" loading="lazy"></a>
+          <figcaption>Best Paper Award certificate, SIBGRAPI 2026</figcaption>
+        </figure>
+        <p>A real-time filter that raises color contrast for color-blind players without making the game look wrong: skin, grass and sky keep colors that still read as natural. It hooks into DirectX, Vulkan and OpenGL games without touching their source. We tested it on 18 commercial games and 2 mini-games built for the study, and players performed considerably better with it on.</p>
+        <div class="more">
+          <a href="http://sibgrapi.sid.inpe.br/col/sid.inpe.br/sibgrapi/2026/08.28.21.08/doc/Violato-159.pdf?metadatarepository=sid.inpe.br/sibgrapi/2026/08.28.21.08.18&amp;mirror=sid.inpe.br/sibgrapi@80/2007/08.02.16.22&amp;languagebutton=en">Paper (PDF)</a>
+          <a href="https://www.inf.ufrgs.br/site/noticia/trabalho-foi-premiado-no-sibgrapi-2026/">UFRGS article (Portuguese)</a>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section>
+    <h2>Other projects</h2>
+    <ul class="list">
+      <li>
+        <span class="when">2022–2023</span>
+        <span><strong>Relief Texture Mapping in UE5</strong><span class="desc">With texture atlases and silhouette correction, made together with the technique's creators, Manuel Oliveira and Fabio Policarpo.</span></span>
+        <span class="more"><a href="https://www.inf.ufrgs.br/~oliveira/RTM.html">About RTM</a></span>
+      </li>
+      <li>
+        <span class="when">2022</span>
+        <span><strong>Model viewer &amp; software renderer</strong><span class="desc">OpenGL renderer and a CPU rasterizer written from scratch in C++, both with relief mapping.</span></span>
+        <span class="more"><a href="https://github.com/tiagobinz/Model_Viewer">GitHub</a></span>
+      </li>
+      <li>
+        <span class="when">2016–2017</span>
+        <span><strong>Grimoire of Time</strong><span class="desc">Language-learning RPG demo at Epic Fable. Gameplay, UI and AI in Unity, plus 3D art.</span></span>
+        <span class="more"><a href="https://youtu.be/PVE0MOH8MmA">Trailer</a></span>
+      </li>
+      <li>
+        <span class="when">2017–2025</span>
+        <span><strong>Teaching</strong><span class="desc">Three 10-month game development courses at Escola Elemental, and a five-class Unity workshop at UFRGS in 2025.</span></span>
+        <span class="more"><a href="https://www.youtube.com/playlist?list=PLlvm9Ne7zbuSdlMRt1dm95SRuJovkubx0">Lectures</a></span>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Tools I work with</h2>
+    <dl class="skills">
+      <dt>Engines</dt><dd>Unreal Engine 4 and 5 (C++, Blueprints, nDisplay), Unity (C#)</dd>
+      <dt>Languages</dt><dd>C++, C#, Python, HLSL</dd>
+      <dt>Platforms</dt><dd>PC, PS4, Xbox One, Nintendo Switch, Android, iOS</dd>
+      <dt>Version control</dt><dd>Perforce, Git, SVN</dd>
+      <dt>Languages spoken</dt><dd>Portuguese (native), English (full professional)</dd>
+    </dl>
+  </section>
+
+  <footer>
+    <span>Tiago Binz · Updated November 2026</span>
+    <span class="links">
+      <a href="mailto:tiago.binz@gmail.com">tiago.binz@gmail.com</a>
+      <a href="https://linkedin.com/in/tiago-binz">LinkedIn</a>
+    </span>
+  </footer>
+
+</div>
+<script>
+  document.querySelectorAll('.video[data-yt]').forEach(function (el) {
+    el.querySelector('button').addEventListener('click', function () {
+      // YouTube requires a Referer header (error 153 without it), so set the policy explicitly
+      el.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + el.dataset.yt +
+        '?autoplay=1&rel=0' + (el.dataset.start ? '&start=' + el.dataset.start : '') + '" title="Video" allow="autoplay; encrypted-media; picture-in-picture" ' +
+        'referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
+    });
+  });
+</script>
+</body>
+</html>

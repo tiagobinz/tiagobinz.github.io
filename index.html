@@ -52,7 +52,16 @@
   .top nav { display: flex; gap: 20px; }
 
   /* Intro */
-  .intro { padding: 72px 0 64px; }
+  .intro {
+    padding: 72px 0 64px;
+    display: grid; grid-template-columns: 1fr 200px; gap: 0 48px; align-items: start;
+  }
+  /* Top of the photo lines up with the top of the headline's capital letters */
+  .intro .portrait {
+    grid-column: 2; grid-row: 1; width: 200px; height: 200px;
+    object-fit: cover; border-radius: 4px; margin-top: 12px;
+  }
+  .intro-text { grid-column: 1; grid-row: 1; min-width: 0; }
   .intro h1 {
     font-size: clamp(28px, 4.4vw, 40px); line-height: 1.22; font-weight: 600;
     letter-spacing: -0.015em; margin: 0 0 28px; max-width: 760px;
@@ -138,7 +147,9 @@
 
   @media (max-width: 680px) {
     body { font-size: 16px; }
-    .intro { padding: 48px 0 40px; }
+    .intro { padding: 40px 0 40px; grid-template-columns: 1fr; }
+    .intro .portrait { grid-column: 1; grid-row: 1; width: 112px; height: 112px; margin: 0 0 24px; }
+    .intro-text { grid-row: 2; }
     .entry, .skills { grid-template-columns: 1fr; gap: 6px; }
     .list li { grid-template-columns: 1fr; gap: 4px; }
   }
@@ -157,10 +168,13 @@
   </header>
 
   <div class="intro">
+    <img class="portrait" src="tiago.jpg" alt="Photo of Tiago Binz" width="480" height="480">
+    <div class="intro-text">
     <h1>I'm Tiago, a senior game developer with 10+ years of experience. I've worked on Fortnite with Epic Games, led programming at my own studio, and built a game for Netflix House.</h1>
     <p>Most of my work is implementing games in Unreal Engine with C++ and Blueprints: gameplay, UI, porting to consoles and mobile, and also the tools that make the whole team's jobs faster.</p>
     <p>I've been making games since 2016, have taught game development in Unity and Unreal, and I have a B.Sc. in Computer Science from UFRGS.</p>
     <p class="status"><b>●</b> Available for remote work · Porto Alegre, Brazil (UTC−3)</p>
+    </div>
   </div>
 
   <section>
